@@ -1,0 +1,5 @@
+TestWebApplication:
+  image: eastest/web-application:latest
+  labels:
+    io.rancher.scheduler.affinity:host_label: cat=apps
+    io.rancher.scheduler.affinity:host_label_ne: sys=lb
