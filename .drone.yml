@@ -20,7 +20,7 @@
 # This creates the containers in the "TechBlog" stack in our environment.
 deploy:
   rancher:
-    url: $RANCHER_URL
+    url: $$RANCHER_URL
     access_key: $$RANCHER_ACCESS_KEY
     secret_key: $$RANCHER_SECRET_KEY
     service: $$SERVICE_NAME
