@@ -25,3 +25,4 @@ deploy:
     secret_key: $$RANCHER_SECRET_KEY
     service: $$SERVICE_NAME
     docker_image: $$SERVICE_CONTAINER
+    confirm: true
