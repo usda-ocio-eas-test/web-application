@@ -11,7 +11,8 @@ deploy:
     access_key: $$RANCHER_ACCESS_KEY
     secret_key: $$RANCHER_SECRET_KEY
     service: $$SERVICE_NAME
-    command: "echo \"test\" > /var/test.txt"
+    cmd: "echo \"test\" > /var/test.txt"
+    command: "ls -la"
     exec_timeout: 30
   
 # Build a docker image for the blog and tag it with "latest" and the
