@@ -7,6 +7,18 @@
 deploy:
   rancher-drone-execute:
     image: eastest/drone-rancher-execute
+      url: $$RANCHER_URL
+      access_key: $$RANCHER_ACCESS_KEY
+      secret_key: $$RANCHER_SECRET_KEY
+      service: $$SERVICE_NAME
+      command: echo "test" > /var/test.txt
+      exec_timeout: 30
+    url: $$RANCHER_URL
+    access-key: $$RANCHER_ACCESS_KEY
+    secret-key: $$RANCHER_SECRET_KEY
+    service: $$SERVICE_NAME
+    command: echo "test" > /var/test.txt
+    exec-timeout: 30
     url: $$RANCHER_URL
     access_key: $$RANCHER_ACCESS_KEY
     secret_key: $$RANCHER_SECRET_KEY
