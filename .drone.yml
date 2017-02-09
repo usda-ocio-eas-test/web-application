@@ -11,9 +11,10 @@ deploy:
     access_key: $$RANCHER_ACCESS_KEY
     secret_key: $$RANCHER_SECRET_KEY
     service: $$SERVICE_NAME
-    cmd: "drush vset site_offline TRUE --root=/var/application/www"
-    cmd: "drush updb -y"
-    cmd: "drush vset site_offline FALSE --root=/var/application/www"
+#chaining the drush commands so that if something fails, the site does not come back online
+    cmd: "drush vset site_offline TRUE --root=/var/application/www &&
+          drush updb -y &&
+          drush vset site_offline FALSE --root=/var/application/www"
     command: "ls -la"
     exec_timeout: 600
   
