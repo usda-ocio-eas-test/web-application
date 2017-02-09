@@ -13,7 +13,7 @@ deploy:
     service: $$SERVICE_NAME
 #chaining the drush commands so that if something fails, the site does not come back online
     cmd: "drush vset site_offline TRUE --root=/var/application/www &&
-          drush updb -y &&
+          drush updb -y --root=/var/application/www &&
           drush vset site_offline FALSE --root=/var/application/www"
     command: "ls -la"
     exec_timeout: 600
