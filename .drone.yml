@@ -13,7 +13,6 @@ deploy:
     service: $$SERVICE_NAME
 #chaining the drush commands so that if something fails, the site does not come back online
     cmd: "drush vset site_offline TRUE --root=/var/application/www &&
-          drush sql-dump > /mnt/backups/most-recent-backup.sql --root=/var/applications/www &&
           drush updb -y --root=/var/application/www &&
           drush vset site_offline FALSE --root=/var/application/www"
     command: "ls -la"
