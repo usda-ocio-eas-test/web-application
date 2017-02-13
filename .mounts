@@ -1,0 +1,2 @@
+/mnt/shared-storage/public_files:/var/application/www/sites/default/files
+/mnt/shared-storage/config/settings.php:/var/application/www/sites/default/settings.php
