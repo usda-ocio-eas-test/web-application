@@ -11,7 +11,7 @@ deploy:
     access_key: $$RANCHER_ACCESS_KEY
     secret_key: $$RANCHER_SECRET_KEY
     service: $$SERVICE_NAME
-    cmd: "drush vset site_offline TRUE --root=/var/application/www >> /mnt/backups/deploy-log.log 2>&1"
+    cmd: "drush vset site_offline TRUE --root=/var/application/www >> /mnt/shared-storage/backups/deploy-log.log 2>&1"
     exec_timeout: 600
  
  
