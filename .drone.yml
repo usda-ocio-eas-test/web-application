@@ -37,6 +37,7 @@ deploy:
     docker_image: $$SERVICE_CONTAINER
     confirm: true
     timeout: 300
+    start_first: true
 
 
 deploy:
