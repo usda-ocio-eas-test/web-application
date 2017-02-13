@@ -47,7 +47,7 @@ deploy:
     access_key: $$RANCHER_ACCESS_KEY
     secret_key: $$RANCHER_SECRET_KEY
     service: $$SERVICE_NAME
-    cmd: "drush updb -y --root=/var/application/www >> /mnt/backups/deploy-log.log"
+    cmd: "drush updb -y --root=/var/application/www >> /mnt/shared-storage/backups/deploy-log.log 2>&1"
     exec_timeout: 600
 
 deploy:
@@ -57,6 +57,6 @@ deploy:
     access_key: $$RANCHER_ACCESS_KEY
     secret_key: $$RANCHER_SECRET_KEY
     service: $$SERVICE_NAME
-    cmd: "drush vset site_offline FALSE --root=/var/application/www >> /mnt/backups/deploy-log.log"
+    cmd: "drush vset site_offline FALSE --root=/var/application/www >> /mnt/shared-storage/backups/deploy-log.log 2>&1"
     exec_timeout: 600
 
