@@ -19,7 +19,7 @@ deploy:
     access_key: $$RANCHER_ACCESS_KEY
     secret_key: $$RANCHER_SECRET_KEY
     service: $$SERVICE_NAME
-    cmd: "drush sql-dump --result-file=/mnt/shared-storage/backups/predeploy.sql --root=/var/application/www >> /mnt/shared-storage/logs/deploy-log.log 2>&1"
+    cmd: "drush sql-dump --result-file=/mnt/shared-storage/backups/predeploy`date +%Y-%m-%d_%H:%M:%S`.sql --root=/var/application/www >> /mnt/shared-storage/logs/deploy-log.log 2>&1"
     exec_timeout: 600
 
 # Deploy the updated code base to the Rancher environment
@@ -68,7 +68,7 @@ deploy:
     access_key: $$RANCHER_ACCESS_KEY
     secret_key: $$RANCHER_SECRET_KEY
     service: $$SERVICE_NAME
-    cmd: "drush sql-dump --result-file=/mnt/shared-storage/backups/postdeploy.sql --root=/var/application/www >> /mnt/shared-storage/logs/deploy-log.log 2>&1"
+    cmd: "drush sql-dump --result-file=/mnt/shared-storage/backups/postdeploy`date +%Y-%m-%d_%H:%M:%S`.sql --root=/var/application/www >> /mnt/shared-storage/logs/deploy-log.log 2>&1"
     exec_timeout: 600
 
 # Perform a cache clear on the site
