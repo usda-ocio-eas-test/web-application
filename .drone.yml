@@ -59,7 +59,19 @@ deploy:
     cmd: "drush cc all -y --root=/var/application/www >> /mnt/shared-storage/logs/deploy-log.log 2>&1"
     exec_timeout: 600
 
+# Perform a post deploy db backup
+# Log to /mnt/shared-storage/logs
+deploy:
+  rancher-drone-execute:
+    image: eastest/drone-rancher-execute
+    url: $$RANCHER_URL
+    access_key: $$RANCHER_ACCESS_KEY
+    secret_key: $$RANCHER_SECRET_KEY
+    service: $$SERVICE_NAME
+    cmd: "drush sql-dump --result-file=/mnt/shared-storage/backups/postdeploy.sql --root=/var/application/www >> /mnt/shared-storage/logs/deploy-log.log 2>&1"
+    exec_timeout: 600
 
+# Perform a cache clear on the site
 # Take the site out of maintenance mode
 # Log to /mnt/shared-storage/logs
 deploy:
