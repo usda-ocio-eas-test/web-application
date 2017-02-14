@@ -1,3 +1,6 @@
+branches:
+  - oc-environment
+
 # Place the site into maintenance mode
 # Log to /mnt/shared-storage/logs
 deploy:
