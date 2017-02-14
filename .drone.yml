@@ -71,6 +71,7 @@ deploy:
     cmd: "drush sql-dump --result-file=/mnt/shared-storage/backups/postdeploy`date +%Y-%m-%d_%H:%M:%S`.sql --root=/var/application/www >> /mnt/shared-storage/logs/deploy-log.log 2>&1"
     exec_timeout: 600
 
+
 # Perform a cache clear on the site
 # Take the site out of maintenance mode
 # Log to /mnt/shared-storage/logs
