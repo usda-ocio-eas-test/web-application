@@ -1,3 +1,18 @@
+# Place the site into maintenance mode
+# Log to /mnt/shared-storage/logs
+deploy:
+  rancher-drone-execute:
+    image: eastest/drone-rancher-execute
+    url: $$RANCHER_URL
+    access_key: $$RANCHER_ACCESS_KEY
+    secret_key: $$RANCHER_SECRET_KEY
+    service: $$SERVICE_NAME
+    cmd: "drush vset site_offline TRUE --root=/var/application/www >> /mnt/shared-storage/logs/deploy-log.log 2>&1"
+    exec_timeout: 600
+
+# Deploy the updated code base to the Rancher environment
+# permform a rolling restart of containers which will automatically
+# pull down the code.
 deploy:
   rancher:
     url: $$RANCHER_URL
@@ -7,3 +22,40 @@ deploy:
     docker_image: $$SERVICE_CONTAINER
     confirm: true
     timeout: 300
+
+# Perform a drush updb on the site
+# Log to /mnt/shared-storage/logs
+deploy:
+  rancher-drone-execute:
+    image: eastest/drone-rancher-execute
+    url: $$RANCHER_URL
+    access_key: $$RANCHER_ACCESS_KEY
+    secret_key: $$RANCHER_SECRET_KEY
+    service: $$SERVICE_NAME
+    cmd: "drush updb -y --root=/var/application/www >> /mnt/shared-storage/backups/deploy-log.log 2>&1"
+    exec_timeout: 600
+
+# Perform a cache clear on the site
+# # Log to /mnt/shared-storage/logs
+deploy:
+  rancher-drone-execute:
+    image: eastest/drone-rancher-execute
+    url: $$RANCHER_URL
+    access_key: $$RANCHER_ACCESS_KEY
+    secret_key: $$RANCHER_SECRET_KEY
+    service: $$SERVICE_NAME
+    cmd: "drush cc all -y --root=/var/application/www >> /mnt/shared-storage/backups/deploy-log.log 2>&1"
+    exec_timeout: 600
+
+
+# Take the site out of maintenance mode
+# Log to /mnt/shared-storage/logs
+deploy:
+  rancher-drone-execute:
+    image: eastest/drone-rancher-execute
+    url: $$RANCHER_URL
+    access_key: $$RANCHER_ACCESS_KEY
+    secret_key: $$RANCHER_SECRET_KEY
+    service: $$SERVICE_NAME
+    cmd: "drush vset site_offline FALSE --root=/var/application/www >> /mnt/shared-storage/backups/deploy-log.log 2>&1"
+    exec_timeout: 600
