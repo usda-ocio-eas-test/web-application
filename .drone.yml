@@ -10,6 +10,18 @@ deploy:
     cmd: "drush vset site_offline TRUE --root=/var/application/www >> /mnt/shared-storage/logs/deploy-log.log 2>&1"
     exec_timeout: 600
 
+# Perform a pre deploy db backup
+# Log to /mnt/shared-storage/logs
+deploy:
+  rancher-drone-execute:
+    image: eastest/drone-rancher-execute
+    url: $$RANCHER_URL
+    access_key: $$RANCHER_ACCESS_KEY
+    secret_key: $$RANCHER_SECRET_KEY
+    service: $$SERVICE_NAME
+    cmd: "drush sql-dump --result-file=/mnt/shared-storage/backups/predeploy.sql --root=/var/application/www >> /mnt/shared-storage/logs/deploy-log.log 2>&1"
+    exec_timeout: 600
+
 # Deploy the updated code base to the Rancher environment
 # permform a rolling restart of containers which will automatically
 # pull down the code.
