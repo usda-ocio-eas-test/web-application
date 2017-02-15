@@ -72,7 +72,7 @@ deploy:
     secret_key: $$RANCHER_SECRET_KEY
     service: $$SERVICE_NAME
     # Get the site name using drush, removing the field name, spaces and single quotes using sed
-    cmd: "TMP_SITE_NAME=`drush vget site_name --root=/var/application/www`; TMP_SHORT_NAME=`echo $TMP_SITE_NAME| sed 's/ //g'|cut -d\\' -f2`; drush sql-dump --result-file=/mnt/shared-storage/backups/`echo $TMP_SHORT_NAME`_postdeploy_`date +%Y-%m-%d_%H:%M:%S`.sql --root=/var/application/www >> /mnt/shared-storage/logs/deploy-log.log 2>&1"
+    cmd: "TMP_SITE_NAME=`drush vget site_name --root=/var/application/www`; TMP_SHORT_NAME=`echo $TMP_SITE_NAME|sed -e s/^site_name://g -e s/\\'//g -e s/\\ //g`; drush sql-dump --result-file=/mnt/shared-storage/backups/`echo $TMP_SHORT_NAME`_postdeploy_`date +%Y-%m-%d_%H:%M:%S`.sql --root=/var/application/www >> /mnt/shared-storage/logs/deploy-log.log 2>&1"
     exec_timeout: 600
 
 
