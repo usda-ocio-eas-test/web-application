@@ -92,9 +92,11 @@ deploy:
 notify:
   email:
     from: usdasmtp@gmail.com
-    host: smtp.gmail.com
-    username: usdasmtp@gmail.com
-    password: PzEH3U3X9pWVae
+    host: $$SMTP_HOST
+    username: $$SMTP_USER
+    password: $$SMTP_PASSWORD
+    #username: usdasmtp@gmail.com
+    #password: PzEH3U3X9pWVae
     recipients:
       - Jerry.Eshbaugh@ocio.usda.gov
       - sean.schoolcraft@ocio.usda.gov
