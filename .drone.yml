@@ -6,7 +6,7 @@ deploy:
     url: $$RANCHER_URL
     access_key: $$RANCHER_ACCESS_KEY
     secret_key: $$RANCHER_SECRET_KEY
-    service: $$SERVICE_NAME
+    service: webbackend2
     cmd: "drush vset site_offline TRUE --root=/var/application/www >> /mnt/shared-storage/logs/deploy-log.log 2>&1"
     exec_timeout: 600
 
