@@ -86,3 +86,15 @@ deploy:
     service: $$SERVICE_NAME
     cmd: "drush vset site_offline FALSE --root=/var/application/www >> /mnt/shared-storage/logs/deploy-log.log 2>&1"
     exec_timeout: 600
+
+#we are going to need to add the smtp url and pass to the secret vars eventually
+#Send notification email of build process (start/stop/issues)
+notify:
+  email:
+    from: usdasmtp@gmail.com
+    host: smtp.gmail.com
+    username: usdasmtp@gmail.com
+    password: PzEH3U3X9pWVae
+    recipients:
+      - Jerry.Eshbaugh@ocio.usda.gov
+      - sean.schoolcraft@ocio.usda.gov
