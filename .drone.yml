@@ -18,7 +18,7 @@ deploy:
     access_key: $$RANCHER_ACCESS_KEY
     secret_key: $$RANCHER_SECRET_KEY
     service: $$SERVICE_NAME
-    cmd: "TT=testsite2 && TEMPSITENAME=`drush vget site_name --root=/var/application/www` &&  drush sql-dump --result-file=/mnt/shared-storage/backups/`echo $TT`_testdeploy_`date +%Y-%m-%d_%H:%M:%S`.sql --root=/var/application/www > /mnt/shared-storage/logs/complextest.log 2>&1"
+    cmd: "TT=testsite2 && TEMPSITENAME=`drush vget site_name --root=/var/application/www` && AA=`echo $TEMPSITENAME| sed 's/ //g'  &&  drush sql-dump --result-file=/mnt/shared-storage/backups/`echo $TT`_testdeploy_`date +%Y-%m-%d_%H:%M:%S`.sql --root=/var/application/www > /mnt/shared-storage/logs/complextest.log 2>&1"
     exec_timeout: 300
 
 # Deploy the updated code base to the Rancher environment
