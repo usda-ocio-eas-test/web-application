@@ -21,7 +21,8 @@ deploy:
     access_key: $$RANCHER_ACCESS_KEY
     secret_key: $$RANCHER_SECRET_KEY
     service: $$SERVICE_NAME
-    cmd: "TEMPSITENAME=`drush vget site_name --root=/var/application/www`; TT=`echo $TEMPSITENAME| sed 's/ //g'|cut -d\\' -f2`; drush sql-dump --result-file=/mnt/shared-storage/backups/`echo $TT`_predeploy_`date +%Y-%m-%d_%H:%M:%S`.sql --root=/var/application/www >> /mnt/shared-storage/logs/deploy-log.log 2>&1"
+    # Get the site name using drush, removing the field name, spaces and single quotes using sed
+    cmd: "TMP_SITE_NAME=`drush vget site_name --root=/var/application/www`; TMP_SHORT_NAME=`echo $TMP_SITE_NAME|sed -e s/^site_name://g -e s/\\'//g -e s/\\ //g`; drush sql-dump --result-file=/mnt/shared-storage/backups/`echo $TMP_SHORT_NAME`_predeploy_`date +%Y-%m-%d_%H:%M:%S`.sql --root=/var/application/www >> /mnt/shared-storage/logs/deploy-log.log 2>&1"
     exec_timeout: 600
 
 # Deploy the updated code base to the Rancher environment
@@ -70,7 +71,8 @@ deploy:
     access_key: $$RANCHER_ACCESS_KEY
     secret_key: $$RANCHER_SECRET_KEY
     service: $$SERVICE_NAME
-    cmd: "TEMPSITENAME=`drush vget site_name --root=/var/application/www`; TT=`echo $TEMPSITENAME| sed 's/ //g'|cut -d\\' -f2`; drush sql-dump --result-file=/mnt/shared-storage/backups/`echo $TT`_postdeploy_`date +%Y-%m-%d_%H:%M:%S`.sql --root=/var/application/www >> /mnt/shared-storage/logs/deploy-log.log 2>&1"
+    # Get the site name using drush, removing the field name, spaces and single quotes using sed
+    cmd: "TMP_SITE_NAME=`drush vget site_name --root=/var/application/www`; TMP_SHORT_NAME=`echo $TMP_SITE_NAME| sed 's/ //g'|cut -d\\' -f2`; drush sql-dump --result-file=/mnt/shared-storage/backups/`echo $TMP_SHORT_NAME`_postdeploy_`date +%Y-%m-%d_%H:%M:%S`.sql --root=/var/application/www >> /mnt/shared-storage/logs/deploy-log.log 2>&1"
     exec_timeout: 600
 
 
@@ -95,8 +97,7 @@ notify:
     host: $$SMTP_HOST
     username: $$SMTP_USER
     password: $$SMTP_PASSWORD
-    #username: usdasmtp@gmail.com
-    #password: PzEH3U3X9pWVae
     recipients:
       - Jerry.Eshbaugh@ocio.usda.gov
       - sean.schoolcraft@ocio.usda.gov
+      - caleb.champlin@ocio.usda.gov
