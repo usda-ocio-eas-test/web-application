@@ -103,7 +103,7 @@ notify:
       - caleb.champlin@ocio.usda.gov
     subject: >
       {{#success build.status}}
-        DEPLOYMENT SUCCESS: {{ build.author }} - {{ build.branch}}
+        DEPLOYMENT SUCCESS: {{ build.author }} on {{ build.repo }}:{{ build.branch }}
       {{else}}
-        DEPLOYMENT FAILURE: {{ build.author }} - {{ build.branch}}
+        DEPLOYMENT FAILURE: {{ build.author }} on {{ build.repo }}:{{ build.branch }}
       {{/success}} 
