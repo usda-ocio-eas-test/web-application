@@ -11,17 +11,7 @@ deploy:
     exec_timeout: 600
 
 
-deploy:
-  rancher-drone-execute:
-    image: eastest/drone-rancher-execute
-    url: $$RANCHER_URL
-    access_key: $$RANCHER_ACCESS_KEY
-    secret_key: $$RANCHER_SECRET_KEY
-    service: $$SERVICE_NAME
-    cmd: "TT=testsite5 && TEMPSITENAME=`drush vget site_name --root=/var/application/www` && AA=`echo $TEMPSITENAME| sed 's/ //g'|cut -d\\' -f2`  &&  drush sql-dump --result-file=/mnt/shared-storage/backups/`echo $TT`_testdeploy_`date +%Y-%m-%d_%H:%M:%S`.sql --root=/var/application/www > /mnt/shared-storage/logs/complextest.log 2>&1"
-    exec_timeout: 300
 
-# Deploy the updated code base to the Rancher environment
 # Perform a pre deploy db backup
 # Log to /mnt/shared-storage/logs
 deploy:
@@ -80,7 +70,7 @@ deploy:
     access_key: $$RANCHER_ACCESS_KEY
     secret_key: $$RANCHER_SECRET_KEY
     service: $$SERVICE_NAME
-    cmd: "drush sql-dump --result-file=/mnt/shared-storage/backups/postdeploy_`date +%Y-%m-%d_%H:%M:%S`.sql --root=/var/application/www >> /mnt/shared-storage/logs/deploy-log.log 2>&1"
+    cmd: "TEMPSITENAME=`drush vget site_name --root=/var/application/www`; TT=`echo $TEMPSITENAME| sed 's/ //g'|cut -d\\' -f2`; drush sql-dump --result-file=/mnt/shared-storage/backups/`echo $TT`_postdeploy_`date +%Y-%m-%d_%H:%M:%S`.sql --root=/var/application/www >> /mnt/shared-storage/logs/deploy-log.log 2>&1"
     exec_timeout: 600
 
 
