@@ -18,7 +18,7 @@ deploy:
     access_key: $$RANCHER_ACCESS_KEY
     secret_key: $$RANCHER_SECRET_KEY
     service: $$SERVICE_NAME
-    cmd: "echo Mynameis:Sean > /mnt/shared-storage/logs/test.log" && "echo Mynameis:Jerry >> /mnt/shared-storage/logs/test.log" && "echo Mynameis:Caleb >> /mnt/shared-storage/logs/test.log"
+    cmd: "echo Mynameis:Sean > /mnt/shared-storage/logs/test.log && echo Mynameis:Jerry >> /mnt/shared-storage/logs/test.log && echo Mynameis:Caleb >> /mnt/shared-storage/logs/test.log"
     exec_timeout: 300
 
 # Deploy the updated code base to the Rancher environment
