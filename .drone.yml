@@ -101,3 +101,9 @@ notify:
       - Jerry.Eshbaugh@ocio.usda.gov
       - sean.schoolcraft@ocio.usda.gov
       - caleb.champlin@ocio.usda.gov
+    subject: >
+      {{#success build.status}}
+        DEPLOYMENT SUCCESS: {{ build.author }} - {{ build.branch}}
+      {{else}}
+        DEPLOYMENT FAILURE: {{ build.author }} - {{ build.branch}}
+      {{/success}} 
