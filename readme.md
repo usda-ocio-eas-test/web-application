@@ -37,5 +37,5 @@ Add drone installation from catalog
  * Services are current started before the old one is shut down
  
  ## Drupal State
- * Todo
+ * Todo by Sean Schoolcraft (fill in info about steps in drone deploy)
 
